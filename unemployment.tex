@@ -1,0 +1,384 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Unemployment},
+  pdfauthor={Tom},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Unemployment}
+\author{Tom}
+\date{2023-10-14}
+
+\begin{document}
+\maketitle
+
+\hypertarget{intro}{%
+\section{Intro}\label{intro}}
+
+This analysis delves into US unemployment data, focusing on two key
+aspects: disparities in unemployment rates by race and gender, and the
+impact of educational level, particularly possessing a bachelor's
+degree, on these rates.
+
+We examine racial disparities among Black, White, and Hispanic
+individuals and explore gender differences, considering education
+levels. Our goal is to offer a comprehensive understanding of US
+unemployment trends, using visualizations to highlight variations among
+demographic categories and the influence of education on employment
+prospects.
+
+In summary, this analysis sheds light on disparities and factors
+influencing unemployment rates, aiding informed discussions and
+evidence-based policymaking in the dynamic labor market.
+
+\hypertarget{loading-the-data}{%
+\section{Loading the Data}\label{loading-the-data}}
+
+To begin, load the following R packages: ggplot2, tidyverse, and readr.
+Then enter your file path to read the included CSV file into your R
+environment.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(readr)}
+\FunctionTok{library}\NormalTok{(cowplot)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(scales)}
+\NormalTok{usunemployment }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"/Users/tomascontreras/Documents/codingthings/SQL + Datasets/UnemploymentUS1978{-}2023.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{comparing-gender-and-bachelors-degree-impact-on-unemployment-rates}{%
+\section{Comparing Gender and Bachelor's Degree Impact on Unemployment
+Rates}\label{comparing-gender-and-bachelors-degree-impact-on-unemployment-rates}}
+
+In this section, we conduct a comprehensive exploration of unemployment
+rates, with a specific focus on gender disparities and the impact of
+educational attainment. The first chart scrutinizes the dynamic trends
+in unemployment rates between men and women over time, revealing
+valuable insights into gender-specific employment dynamics.
+
+To deepen our understanding of these gender-driven dynamics, the second
+chart zooms in on unemployment rates for men and women with bachelor's
+degrees. This analysis uncovers how educational attainment intersects
+with gender to shape employment prospects, providing nuanced insights
+into the complex relationship between education and gender in the labor
+market. These visualizations shed light on the multifaceted factors
+influencing unemployment rates and offer valuable input for
+gender-equity-focused policies and strategies in the labor market.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Set the width and height of the individual plots}
+\NormalTok{plot\_width }\OtherTok{\textless{}{-}} \DecValTok{8}  \CommentTok{\# Adjust as needed}
+\NormalTok{plot\_height }\OtherTok{\textless{}{-}} \DecValTok{4}  \CommentTok{\# Adjust as needed}
+
+\CommentTok{\# Select the relevant columns and convert the date column to Date format for gender data}
+\NormalTok{usunemployment\_men\_women }\OtherTok{\textless{}{-}}\NormalTok{ usunemployment }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(date, women, men) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{date =} \FunctionTok{as.Date}\NormalTok{(date))}
+
+\CommentTok{\# Create the bar chart for gender unemployment rates}
+\NormalTok{gg\_men\_women }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(usunemployment\_men\_women, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ women, }\AttributeTok{fill =} \StringTok{"Women"}\NormalTok{), }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ men, }\AttributeTok{fill =} \StringTok{"Men"}\NormalTok{), }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Men"} \OtherTok{=} \StringTok{"skyblue"}\NormalTok{, }\StringTok{"Women"} \OtherTok{=} \StringTok{"pink3"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Unemployment Rate"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"Gender"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Unemployment Rates by Gender (1978{-}2023)"}\NormalTok{)}
+
+\CommentTok{\# Select the relevant columns and convert the date column to Date format for gender and bachelor\textquotesingle{}s degree data}
+\NormalTok{usunemployment\_men\_women\_bach }\OtherTok{\textless{}{-}}\NormalTok{ usunemployment }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(date, women\_bachelor.s\_degree, men\_bachelor.s\_degree) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{date =} \FunctionTok{as.Date}\NormalTok{(date))}
+
+\CommentTok{\# Create the bar chart for gender and bachelor\textquotesingle{}s degree unemployment rates}
+\NormalTok{gg\_men\_women\_bach }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(usunemployment\_men\_women\_bach, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ women\_bachelor.s\_degree, }\AttributeTok{fill =} \StringTok{"Women"}\NormalTok{), }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ men\_bachelor.s\_degree, }\AttributeTok{fill =} \StringTok{"Men"}\NormalTok{), }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Men"} \OtherTok{=} \StringTok{"skyblue"}\NormalTok{, }\StringTok{"Women"} \OtherTok{=} \StringTok{"pink3"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Unemployment Rate"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"Gender"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Unemployment Rates by Gender Among Individuals with Bachelor\textquotesingle{}s Degrees (1978{-}2023)"}\NormalTok{)}
+
+\CommentTok{\# Calculate the maximum Y{-}axis value for both plots}
+\NormalTok{max\_value }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(}
+  \FunctionTok{max}\NormalTok{(usunemployment\_men\_women}\SpecialCharTok{$}\NormalTok{women, usunemployment\_men\_women}\SpecialCharTok{$}\NormalTok{men),}
+  \FunctionTok{max}\NormalTok{(usunemployment\_men\_women\_bach}\SpecialCharTok{$}\NormalTok{women\_bachelor.s\_degree, usunemployment\_men\_women\_bach}\SpecialCharTok{$}\NormalTok{men\_bachelor.s\_degree)}
+\NormalTok{)}
+
+\CommentTok{\# Set Y{-}axis limits for both plots}
+\NormalTok{gg\_men\_women }\OtherTok{\textless{}{-}}\NormalTok{ gg\_men\_women }\SpecialCharTok{+} \FunctionTok{ylim}\NormalTok{(}\DecValTok{0}\NormalTok{, max\_value)}
+\NormalTok{gg\_men\_women\_bach }\OtherTok{\textless{}{-}}\NormalTok{ gg\_men\_women\_bach }\SpecialCharTok{+} \FunctionTok{ylim}\NormalTok{(}\DecValTok{0}\NormalTok{, max\_value)}
+
+\CommentTok{\# Combine the two plots one above the other}
+\NormalTok{combined\_plot }\OtherTok{\textless{}{-}} \FunctionTok{plot\_grid}\NormalTok{(gg\_men\_women, gg\_men\_women\_bach, }\AttributeTok{ncol =} \DecValTok{1}\NormalTok{, }\AttributeTok{align =} \StringTok{"v"}\NormalTok{, }\AttributeTok{rel\_heights =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+
+\CommentTok{\# Set the width and height of the combined plot}
+\NormalTok{plot\_new\_width }\OtherTok{\textless{}{-}}\NormalTok{ plot\_width}
+\NormalTok{plot\_new\_height }\OtherTok{\textless{}{-}}\NormalTok{ plot\_height }\SpecialCharTok{*} \DecValTok{2}  \CommentTok{\# Double the height for stacking vertically}
+
+\CommentTok{\# Display the combined plot with the adjusted width and height}
+\FunctionTok{options}\NormalTok{(}\AttributeTok{repr.plot.width =}\NormalTok{ plot\_new\_width, }\AttributeTok{repr.plot.height =}\NormalTok{ plot\_new\_height)}
+\FunctionTok{print}\NormalTok{(combined\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{unemployment_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\hypertarget{comparison-of-unemployment-rates-by-race-and-among-individuals-with-bachelors-degrees}{%
+\section{Comparison of Unemployment Rates by Race and Among Individuals
+with Bachelor's
+Degrees}\label{comparison-of-unemployment-rates-by-race-and-among-individuals-with-bachelors-degrees}}
+
+These visualizations provide an in-depth examination of unemployment
+trends within Black, White, and Hispanic communities. The upper chart
+offers a comprehensive view of general trends in unemployment rates
+among these demographic groups. In contrast, the lower chart narrows the
+focus to individuals holding bachelor's degrees, specifically
+illuminating the interplay between education and unemployment rates
+within these racial categories. By maintaining consistent Y-axis limits
+for effective comparison, both charts shed light on the complex dynamics
+of employment disparities within these racial demographics, particularly
+emphasizing the significant influence of educational attainment on
+unemployment rates.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Plot 1: Unemployment Rates by Race}
+\NormalTok{usunemployment\_black\_white }\OtherTok{\textless{}{-}}\NormalTok{ usunemployment }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(date, black, white, hispanic) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{date =} \FunctionTok{as.Date}\NormalTok{(date))}
+
+\CommentTok{\# Calculate the max Y{-}axis value for both plots}
+\NormalTok{max\_value }\OtherTok{\textless{}{-}} \FunctionTok{max}\NormalTok{(}
+  \FunctionTok{max}\NormalTok{(usunemployment\_black\_white}\SpecialCharTok{$}\NormalTok{black),}
+  \FunctionTok{max}\NormalTok{(usunemployment\_black\_white}\SpecialCharTok{$}\NormalTok{white),}
+  \FunctionTok{max}\NormalTok{(usunemployment\_black\_white}\SpecialCharTok{$}\NormalTok{hispanic)}
+\NormalTok{)}
+
+\NormalTok{plot1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(usunemployment\_black\_white, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ black, }\AttributeTok{fill =} \StringTok{"Black"}\NormalTok{), }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ white, }\AttributeTok{fill =} \StringTok{"White"}\NormalTok{), }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ hispanic, }\AttributeTok{fill =} \StringTok{"Hispanic"}\NormalTok{), }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Black"} \OtherTok{=} \StringTok{"orange"}\NormalTok{, }\StringTok{"White"} \OtherTok{=} \StringTok{"blue4"}\NormalTok{, }\StringTok{"Hispanic"} \OtherTok{=} \StringTok{"green"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Unemployment Rate"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"Race"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Unemployment Rates by Race (1978{-}2023)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\DecValTok{0}\NormalTok{, max\_value)  }\CommentTok{\# Set Y{-}axis limits}
+
+\CommentTok{\# Plot 2: Unemployment Rates by Race Among Individuals with Bachelor\textquotesingle{}s Degrees}
+\NormalTok{usunemployment\_black\_white\_hisp\_bach }\OtherTok{\textless{}{-}}\NormalTok{ usunemployment }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(date, black\_bachelor.s\_degree, white\_bachelor.s\_degree, hispanic\_bachelor.s\_degree) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{date =} \FunctionTok{as.Date}\NormalTok{(date))}
+
+\NormalTok{plot2 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(usunemployment\_black\_white\_hisp\_bach, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ black\_bachelor.s\_degree, }\AttributeTok{fill =} \StringTok{"Black"}\NormalTok{), }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ white\_bachelor.s\_degree, }\AttributeTok{fill =} \StringTok{"White"}\NormalTok{), }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y =}\NormalTok{ hispanic\_bachelor.s\_degree, }\AttributeTok{fill =} \StringTok{"Hispanic"}\NormalTok{), }\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"dodge"}\NormalTok{, }\AttributeTok{alpha=}\FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"Black"} \OtherTok{=} \StringTok{"orange"}\NormalTok{, }\StringTok{"White"} \OtherTok{=} \StringTok{"blue4"}\NormalTok{, }\StringTok{"Hispanic"}\OtherTok{=}\StringTok{"green"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{"Unemployment Rate"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"Race"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Unemployment Rates by Race Among Individuals with Bachelor\textquotesingle{}s Degrees (1978{-}2023)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{ylim}\NormalTok{(}\DecValTok{0}\NormalTok{, max\_value)  }\CommentTok{\# Set Y{-}axis limits}
+
+\CommentTok{\# Combine plots vertically using cowplot}
+\NormalTok{combined\_plot }\OtherTok{\textless{}{-}} \FunctionTok{plot\_grid}\NormalTok{(plot1, plot2, }\AttributeTok{ncol =} \DecValTok{1}\NormalTok{)}
+
+\CommentTok{\# Print the combined plot}
+\NormalTok{combined\_plot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{unemployment_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\hypertarget{analyzing-deviations-from-the-overall-average-unemployment-rate}{%
+\section{Analyzing Deviations from the Overall Average Unemployment
+Rate}\label{analyzing-deviations-from-the-overall-average-unemployment-rate}}
+
+The graph presented here serves as a visual guide, shedding light on how
+the average unemployment rate among diverse demographic categories
+deviates from the overarching average unemployment rate. As we delve
+into this analysis, it's important to keep in mind that this data spans
+from 1978 to 2023, offering a broad temporal perspective. This
+visualization provides a dynamic insight into the nuanced patterns of
+unemployment rates, offering a comparative lens to observe how different
+demographic groups fare in relation to the overall employment landscape.
+By examining these variations, we can uncover trends, disparities, and
+influential factors that inform labor market policies and decisions.
+This exploration aims to contribute to a comprehensive understanding of
+US unemployment trends, particularly in the context of race, gender, and
+educational attainment, and thereby foster meaningful discussions,
+data-driven policymaking, and inspire further research in the field.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Category =} \FunctionTok{c}\NormalTok{(}\StringTok{"Men"}\NormalTok{, }\StringTok{"Women"}\NormalTok{, }\StringTok{"White"}\NormalTok{, }\StringTok{"Hispanic"}\NormalTok{, }\StringTok{"Black"}\NormalTok{, }\StringTok{"Men (Bachelor\textquotesingle{}s)"}\NormalTok{, }\StringTok{"Women (Bachelor\textquotesingle{}s)"}\NormalTok{, }\StringTok{"White (Bachelor\textquotesingle{}s)"}\NormalTok{, }\StringTok{"Hispanic (Bachelor\textquotesingle{}s)"}\NormalTok{, }\StringTok{"Black (Bachelor\textquotesingle{}s)"}\NormalTok{),}
+  \AttributeTok{Value =} \FunctionTok{c}\NormalTok{(diff\_avg\_men, diff\_avg\_women, diff\_avg\_white, diff\_avg\_hispanic, diff\_avg\_black, diff\_avg\_men\_bach, diff\_avg\_women\_bach, diff\_avg\_white\_bach, diff\_avg\_hispanic\_bach, diff\_avg\_black\_bach)}
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(Value))  }\CommentTok{\# Sort the data frame by "Value" in descending order}
+
+\CommentTok{\# Create the bar graph}
+\NormalTok{bar\_plot }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(Category, }\SpecialCharTok{{-}}\NormalTok{Value), }\AttributeTok{y =}\NormalTok{ Value)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"skyblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{sprintf}\NormalTok{(}\StringTok{"\%.2f\%\%"}\NormalTok{, Value)), }\AttributeTok{vjust =} \SpecialCharTok{{-}}\FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Deviation from Overall Average Unemployment Rates by Demographic and Bachelor\textquotesingle{}s Degree (1978{-}2023)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{xlab}\NormalTok{(}\StringTok{"Category"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{ylab}\NormalTok{(}\StringTok{"Unemployment Rate"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{45}\NormalTok{, }\AttributeTok{hjust =} \DecValTok{1}\NormalTok{))}
+
+\CommentTok{\# Print the bar\_plot}
+\FunctionTok{print}\NormalTok{(bar\_plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{unemployment_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+In this analysis, we've delved into US unemployment data, focusing on
+two pivotal dimensions: unemployment rates categorized by race and
+gender, and the influence of educational attainment, specifically the
+possession of a bachelor's degree, on these rates.
+
+\begin{verbatim}
+Our exploration of racial disparities in the labor market compared unemployment rates among Black, White, and Hispanic individuals. Simultaneously, we examined gender disparities, taking into account both gender differences and the educational backgrounds of men and women.
+
+The aim of this analysis was to offer a comprehensive understanding of unemployment trends within the United States. We've used visualizations to showcase how different demographic categories deviate from the overall average unemployment rate. These visualizations elucidate the variations in unemployment rates and the influence of education on employment prospects for different demographic groups.
+
+In summary, our analysis provides data-driven insights into unemployment trends. It illuminates disparities and factors that contribute to variations in unemployment rates. This information can serve as a valuable resource for informed discussions and evidence-based policymaking in the labor market.
+\end{verbatim}
+
+These visualizations help us understand how different demographic
+factors, such as race and gender, can impact unemployment rates. The
+data presented here highlights the importance of considering these
+factors when analyzing labor market trends and making informed decisions
+related to workforce policies and opportunities.
+
+Overall, these insights contribute to a better understanding of the
+complex dynamics of unemployment in the United States, and they
+underscore the need for continued efforts to address disparities in
+employment opportunities across different demographic groups.
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.epi.org/data/}{Economic Policy Institute, State of
+  Working America Data Library, ``Unemployment,'' 2023}
+\item
+  Population Sample (Civilian noninstitutional population): The civilian
+  noninstitutional population consists of people 16 years old and older
+  residing in the 50 states and the District of Columbia who are not on
+  active duty in the Armed Forces or living in institutions (such as
+  correctional facilities or nursing homes).
+\end{itemize}
+
+\end{document}
