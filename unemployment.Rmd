@@ -1,0 +1,228 @@
+---
+title: "Unemployment"
+author: "Tom"
+date: "2023-10-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.width=10, fig.height=8)
+```
+
+# Intro
+
+This analysis delves into US unemployment data, focusing on two key aspects: disparities in unemployment rates by race and gender, and the impact of educational level, particularly possessing a bachelor's degree, on these rates.
+
+We examine racial disparities among Black, White, and Hispanic individuals and explore gender differences, considering education levels. Our goal is to offer a comprehensive understanding of US unemployment trends, using visualizations to highlight variations among demographic categories and the influence of education on employment prospects.
+
+In summary, this analysis sheds light on disparities and factors influencing unemployment rates, aiding informed discussions and evidence-based policymaking in the dynamic labor market.
+
+# Loading the Data
+To begin, load the following R packages: ggplot2, tidyverse, and readr. Then enter your file path to read the included CSV file into your R environment.
+
+```{r loading packages, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(readr)
+library(cowplot)
+library(dplyr)
+library(scales)
+usunemployment <- read.csv("/Users/tomascontreras/Documents/codingthings/SQL + Datasets/unemployed_population_1978-12_to_2023-07.csv")
+```
+
+# Comparing Gender and Bachelor's Degree Impact on Unemployment Rates
+
+In this section, we conduct a comprehensive exploration of unemployment rates, with a specific focus on gender disparities and the impact of educational attainment. The first chart scrutinizes the dynamic trends in unemployment rates between men and women over time, revealing valuable insights into gender-specific employment dynamics.
+
+To deepen our understanding of these gender-driven dynamics, the second chart zooms in on unemployment rates for men and women with bachelor's degrees. This analysis uncovers how educational attainment intersects with gender to shape employment prospects, providing nuanced insights into the complex relationship between education and gender in the labor market. These visualizations shed light on the multifaceted factors influencing unemployment rates and offer valuable input for gender-equity-focused policies and strategies in the labor market.
+
+
+```{r}
+# Set the width and height of the individual plots
+plot_width <- 8  # Adjust as needed
+plot_height <- 4  # Adjust as needed
+
+# Select the relevant columns and convert the date column to Date format for gender data
+usunemployment_men_women <- usunemployment %>%
+  select(date, women, men) %>%
+  mutate(date = as.Date(date))
+
+# Create the bar chart for gender unemployment rates
+gg_men_women <- ggplot(usunemployment_men_women, aes(x = date)) +
+  geom_bar(aes(y = women, fill = "Women"), stat = "identity", position = "dodge", alpha = 0.5) +
+  geom_bar(aes(y = men, fill = "Men"), stat = "identity", position = "dodge", alpha = 0.5) +
+  scale_fill_manual(values = c("Men" = "skyblue", "Women" = "pink3")) +
+  labs(y = "Unemployment Rate", fill = "Gender") +
+  theme_minimal() +
+  labs(title = "Unemployment Rates by Gender (1978-2023)")
+
+# Select the relevant columns and convert the date column to Date format for gender and bachelor's degree data
+usunemployment_men_women_bach <- usunemployment %>%
+  select(date, women_bachelor.s_degree, men_bachelor.s_degree) %>%
+  mutate(date = as.Date(date))
+
+# Create the bar chart for gender and bachelor's degree unemployment rates
+gg_men_women_bach <- ggplot(usunemployment_men_women_bach, aes(x = date)) +
+  geom_bar(aes(y = women_bachelor.s_degree, fill = "Women"), stat = "identity", position = "dodge", alpha = 0.5) +
+  geom_bar(aes(y = men_bachelor.s_degree, fill = "Men"), stat = "identity", position = "dodge", alpha = 0.5) +
+  scale_fill_manual(values = c("Men" = "skyblue", "Women" = "pink3")) +
+  labs(y = "Unemployment Rate", fill = "Gender") +
+  theme_minimal() +
+  labs(title = "Unemployment Rates by Gender Among Individuals with Bachelor's Degrees (1978-2023)")
+
+# Calculate the maximum Y-axis value for both plots
+max_value <- max(
+  max(usunemployment_men_women$women, usunemployment_men_women$men),
+  max(usunemployment_men_women_bach$women_bachelor.s_degree, usunemployment_men_women_bach$men_bachelor.s_degree)
+)
+
+# Set Y-axis limits for both plots
+gg_men_women <- gg_men_women + ylim(0, max_value)
+gg_men_women_bach <- gg_men_women_bach + ylim(0, max_value)
+
+# Combine the two plots one above the other
+combined_plot <- plot_grid(gg_men_women, gg_men_women_bach, ncol = 1, align = "v", rel_heights = c(1, 1))
+
+# Set the width and height of the combined plot
+plot_new_width <- plot_width
+plot_new_height <- plot_height * 2  # Double the height for stacking vertically
+
+# Display the combined plot with the adjusted width and height
+options(repr.plot.width = plot_new_width, repr.plot.height = plot_new_height)
+print(combined_plot)
+
+```
+
+# Comparison of Unemployment Rates by Race and Among Individuals with Bachelor's Degrees
+
+These visualizations provide an in-depth examination of unemployment trends within Black, White, and Hispanic communities. The upper chart offers a comprehensive view of general trends in unemployment rates among these demographic groups. In contrast, the lower chart narrows the focus to individuals holding bachelor's degrees, specifically illuminating the interplay between education and unemployment rates within these racial categories. By maintaining consistent Y-axis limits for effective comparison, both charts shed light on the complex dynamics of employment disparities within these racial demographics, particularly emphasizing the significant influence of educational attainment on unemployment rates.
+
+```{r}
+# Plot 1: Unemployment Rates by Race
+usunemployment_black_white <- usunemployment %>%
+  select(date, black, white, hispanic) %>%
+  mutate(date = as.Date(date))
+
+# Calculate the max Y-axis value for both plots
+max_value <- max(
+  max(usunemployment_black_white$black),
+  max(usunemployment_black_white$white),
+  max(usunemployment_black_white$hispanic)
+)
+
+plot1 <- ggplot(usunemployment_black_white, aes(x = date)) +
+  geom_bar(aes(y = black, fill = "Black"), stat = "identity", position = "dodge", alpha = 0.5) +
+  geom_bar(aes(y = white, fill = "White"), stat = "identity", position = "dodge", alpha = 0.5) +
+  geom_bar(aes(y = hispanic, fill = "Hispanic"), stat = "identity", position = "dodge", alpha = 0.5) +
+  scale_fill_manual(values = c("Black" = "orange", "White" = "blue4", "Hispanic" = "green")) +
+  labs(y = "Unemployment Rate", fill = "Race") +
+  labs(title = "Unemployment Rates by Race (1978-2023)") +
+  theme_minimal() +
+  ylim(0, max_value)  # Set Y-axis limits
+
+# Plot 2: Unemployment Rates by Race Among Individuals with Bachelor's Degrees
+usunemployment_black_white_hisp_bach <- usunemployment %>%
+  select(date, black_bachelor.s_degree, white_bachelor.s_degree, hispanic_bachelor.s_degree) %>%
+  mutate(date = as.Date(date))
+
+plot2 <- ggplot(usunemployment_black_white_hisp_bach, aes(x = date)) +
+  geom_bar(aes(y = black_bachelor.s_degree, fill = "Black"), stat = "identity", position = "dodge", alpha = 0.5) +
+  geom_bar(aes(y = white_bachelor.s_degree, fill = "White"), stat = "identity", position = "dodge", alpha=0.5) +
+  geom_bar(aes(y = hispanic_bachelor.s_degree, fill = "Hispanic"), stat = "identity", position = "dodge", alpha=0.5) +
+  scale_fill_manual(values = c("Black" = "orange", "White" = "blue4", "Hispanic"="green")) +
+  labs(y = "Unemployment Rate", fill = "Race") +
+  labs(title = "Unemployment Rates by Race Among Individuals with Bachelor's Degrees (1978-2023)") +
+  theme_minimal() +
+  ylim(0, max_value)  # Set Y-axis limits
+
+# Combine plots vertically using cowplot
+combined_plot <- plot_grid(plot1, plot2, ncol = 1)
+
+# Print the combined plot
+combined_plot
+```
+
+
+```{r, echo=FALSE, results='hide'}
+#summary statistics
+summary(usunemployment$all)
+summary(usunemployment$men)
+summary(usunemployment$women)
+summary(usunemployment$white)
+summary(usunemployment$hispanic)
+summary(usunemployment$black)
+summary(usunemployment$men_bachelor.s_degree)
+summary(usunemployment$women_bachelor.s_degree)
+```
+
+```{r, echo=FALSE}
+#Comparing Summary Statistics
+avg_men_unemployment <- mean(usunemployment$men) * 100
+avg_women_unemployment <- mean(usunemployment$women) * 100
+avg_all_unemployment <- mean(usunemployment$all) * 100
+avg_white <- mean(usunemployment$white) * 100
+avg_hispanic <- mean(usunemployment$hispanic) * 100
+avg_black <- mean(usunemployment$black) * 100
+avg_men_bach <- mean(usunemployment$men_bachelor.s_degree) * 100
+avg_women_bach <- mean(usunemployment$women_bachelor.s_degree) * 100
+avg_white_bach <- mean(usunemployment$white_bachelor.s_degree) * 100
+avg_hispanic_bach <- mean(usunemployment$hispanic_bachelor.s_degree) * 100
+avg_black_bach <- mean(usunemployment$black_bachelor.s_degree) * 100
+
+diff_avg_men <- ((avg_men_unemployment - avg_all_unemployment) / avg_all_unemployment)
+diff_avg_women <- ((avg_women_unemployment - avg_all_unemployment) / avg_all_unemployment)
+diff_avg_white <- ((avg_white - avg_all_unemployment) / avg_all_unemployment)
+diff_avg_hispanic <- ((avg_hispanic - avg_all_unemployment) / avg_all_unemployment)
+diff_avg_black <- ((avg_black - avg_all_unemployment) / avg_all_unemployment)
+diff_avg_men_bach <- ((avg_men_bach - avg_all_unemployment) / avg_all_unemployment)
+diff_avg_women_bach <- ((avg_women_bach - avg_all_unemployment) / avg_all_unemployment)
+diff_avg_white_bach <- ((avg_white_bach - avg_all_unemployment) / avg_all_unemployment)
+diff_avg_hispanic_bach <- ((avg_hispanic_bach - avg_all_unemployment) / avg_all_unemployment)
+diff_avg_black_bach <- ((avg_black_bach - avg_all_unemployment) / avg_all_unemployment)
+```
+
+# Analyzing Deviations from the Overall Average Unemployment Rate
+
+The graph presented here serves as a visual guide, shedding light on how the average unemployment rate among diverse demographic categories deviates from the overarching average unemployment rate. As we delve into this analysis, it's important to keep in mind that this data spans from 1978 to 2023, offering a broad temporal perspective. This visualization provides a dynamic insight into the nuanced patterns of unemployment rates, offering a comparative lens to observe how different demographic groups fare in relation to the overall employment landscape. By examining these variations, we can uncover trends, disparities, and influential factors that inform labor market policies and decisions. This exploration aims to contribute to a comprehensive understanding of US unemployment trends, particularly in the context of race, gender, and educational attainment, and thereby foster meaningful discussions, data-driven policymaking, and inspire further research in the field.
+
+```{r}
+data <- data.frame(
+  Category = c("Men", "Women", "White", "Hispanic", "Black", "Men (Bachelor's)", "Women (Bachelor's)", "White (Bachelor's)", "Hispanic (Bachelor's)", "Black (Bachelor's)"),
+  Value = c(diff_avg_men, diff_avg_women, diff_avg_white, diff_avg_hispanic, diff_avg_black, diff_avg_men_bach, diff_avg_women_bach, diff_avg_white_bach, diff_avg_hispanic_bach, diff_avg_black_bach)
+) %>%
+  arrange(desc(Value))  # Sort the data frame by "Value" in descending order
+
+# Create the bar graph
+bar_plot <- ggplot(data, aes(x = reorder(Category, -Value), y = Value)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  geom_text(aes(label = sprintf("%.2f%%", Value)), vjust = -0.5, size = 3) +
+  labs(title = "Deviation from Overall Average Unemployment Rates by Demographic and Bachelor's Degree (1978-2023)") +
+  xlab("Category") +
+  ylab("Unemployment Rate") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Print the bar_plot
+print(bar_plot)
+
+```
+
+
+# Conclusion
+
+In this analysis, we've delved into US unemployment data, focusing on two pivotal dimensions: unemployment rates categorized by race and gender, and the influence of educational attainment, specifically the possession of a bachelor's degree, on these rates.
+
+    Our exploration of racial disparities in the labor market compared unemployment rates among Black, White, and Hispanic individuals. Simultaneously, we examined gender disparities, taking into account both gender differences and the educational backgrounds of men and women.
+
+    The aim of this analysis was to offer a comprehensive understanding of unemployment trends within the United States. We've used visualizations to showcase how different demographic categories deviate from the overall average unemployment rate. These visualizations elucidate the variations in unemployment rates and the influence of education on employment prospects for different demographic groups.
+
+    In summary, our analysis provides data-driven insights into unemployment trends. It illuminates disparities and factors that contribute to variations in unemployment rates. This information can serve as a valuable resource for informed discussions and evidence-based policymaking in the labor market.
+
+These visualizations help us understand how different demographic factors, such as race and gender, can impact unemployment rates. The data presented here highlights the importance of considering these factors when analyzing labor market trends and making informed decisions related to workforce policies and opportunities.
+
+Overall, these insights contribute to a better understanding of the complex dynamics of unemployment in the United States, and they underscore the need for continued efforts to address disparities in employment opportunities across different demographic groups.
+
+
+# References
+
+- [Economic Policy Institute, State of Working America Data Library, “Unemployment,” 2023](https://www.epi.org/data/)
+- Population Sample (Civilian noninstitutional population): The civilian noninstitutional population consists of people 16 years old and older residing in the 50 states and the District of Columbia who are not on active duty in the Armed Forces or living in institutions (such as correctional facilities or nursing homes).
