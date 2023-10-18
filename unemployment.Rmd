@@ -1,5 +1,5 @@
 ---
-title: "Unemployment"
+title: "Exploring US Unemployment Trends: Disparities in Race, Gender, and Educational Attainment"
 author: "Tom"
 date: "2023-10-14"
 output:
