@@ -27,7 +27,7 @@ library(readr)
 library(cowplot)
 library(dplyr)
 library(scales)
-usunemployment <- read.csv("/Users/tomascontreras/Documents/codingthings/SQL + Datasets/unemployed_population_1978-12_to_2023-07.csv")
+usunemployment <- read.csv("/Path/to/dataset/on/your/machine.csv")
 ```
 
 # Comparing Gender and Bachelor's Degree Impact on Unemployment Rates
