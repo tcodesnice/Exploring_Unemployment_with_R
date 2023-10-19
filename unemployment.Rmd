@@ -20,7 +20,7 @@ We examine racial disparities among Black, White, and Hispanic individuals and e
 In summary, this analysis sheds light on disparities and factors influencing unemployment rates, aiding informed discussions and evidence-based policymaking in the dynamic labor market.
 
 # Loading the Data
-To begin, load the following R packages: ggplot2, tidyverse, and readr. Then enter your file path to read the included CSV file into your R environment.
+To begin, load the following R packages: ggplot2, tidyverse, readr, cowplot, dplyr, and scales. Then enter your file path to read the included CSV file into your R environment.
 
 ```{r loading packages, message=FALSE, warning=FALSE}
 library(ggplot2)
